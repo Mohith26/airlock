@@ -1,7 +1,7 @@
 GO = go
 BIN = bin/airlock
 
-.PHONY: build test race e2e results clean
+.PHONY: build test race e2e results wasm clean
 
 build:
 	$(GO) build -o $(BIN) ./cmd/airlock
@@ -24,3 +24,7 @@ results: build
 
 clean:
 	rm -rf bin
+
+wasm:
+	GOOS=js GOARCH=wasm $(GO) build -trimpath -ldflags="-s -w" -o bin/airlock.wasm ./cmd/airlock-wasm
+	gzip -9 -k -f bin/airlock.wasm
