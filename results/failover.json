@@ -1,0 +1,289 @@
+{
+  "trials": [
+    {
+      "trial": 1,
+      "killed": 1,
+      "new_leader": 2,
+      "election_ms": 366.815,
+      "write_unavailable_ms": 375.896,
+      "jobs_committed_before_kill": 20,
+      "committed_jobs_lost": 0
+    },
+    {
+      "trial": 2,
+      "killed": 1,
+      "new_leader": 3,
+      "election_ms": 236.775,
+      "write_unavailable_ms": 245.992,
+      "jobs_committed_before_kill": 20,
+      "committed_jobs_lost": 0
+    },
+    {
+      "trial": 3,
+      "killed": 3,
+      "new_leader": 1,
+      "election_ms": 409.489,
+      "write_unavailable_ms": 418.848,
+      "jobs_committed_before_kill": 20,
+      "committed_jobs_lost": 0
+    },
+    {
+      "trial": 4,
+      "killed": 2,
+      "new_leader": 3,
+      "election_ms": 254.646,
+      "write_unavailable_ms": 264.893,
+      "jobs_committed_before_kill": 20,
+      "committed_jobs_lost": 0
+    },
+    {
+      "trial": 5,
+      "killed": 3,
+      "new_leader": 1,
+      "election_ms": 154.994,
+      "write_unavailable_ms": 163.074,
+      "jobs_committed_before_kill": 20,
+      "committed_jobs_lost": 0
+    },
+    {
+      "trial": 6,
+      "killed": 3,
+      "new_leader": 2,
+      "election_ms": 179.194,
+      "write_unavailable_ms": 189.12,
+      "jobs_committed_before_kill": 20,
+      "committed_jobs_lost": 0
+    },
+    {
+      "trial": 7,
+      "killed": 3,
+      "new_leader": 2,
+      "election_ms": 238.286,
+      "write_unavailable_ms": 249.236,
+      "jobs_committed_before_kill": 20,
+      "committed_jobs_lost": 0
+    },
+    {
+      "trial": 8,
+      "killed": 2,
+      "new_leader": 3,
+      "election_ms": 223.077,
+      "write_unavailable_ms": 233.308,
+      "jobs_committed_before_kill": 20,
+      "committed_jobs_lost": 0
+    },
+    {
+      "trial": 9,
+      "killed": 2,
+      "new_leader": 3,
+      "election_ms": 167.06,
+      "write_unavailable_ms": 176.074,
+      "jobs_committed_before_kill": 20,
+      "committed_jobs_lost": 0
+    },
+    {
+      "trial": 10,
+      "killed": 2,
+      "new_leader": 1,
+      "election_ms": 211.328,
+      "write_unavailable_ms": 221.393,
+      "jobs_committed_before_kill": 20,
+      "committed_jobs_lost": 0
+    },
+    {
+      "trial": 11,
+      "killed": 2,
+      "new_leader": 1,
+      "election_ms": 161.234,
+      "write_unavailable_ms": 171.871,
+      "jobs_committed_before_kill": 20,
+      "committed_jobs_lost": 0
+    },
+    {
+      "trial": 12,
+      "killed": 3,
+      "new_leader": 2,
+      "election_ms": 191.483,
+      "write_unavailable_ms": 203.649,
+      "jobs_committed_before_kill": 20,
+      "committed_jobs_lost": 0
+    },
+    {
+      "trial": 13,
+      "killed": 2,
+      "new_leader": 3,
+      "election_ms": 171.823,
+      "write_unavailable_ms": 182.013,
+      "jobs_committed_before_kill": 20,
+      "committed_jobs_lost": 0
+    },
+    {
+      "trial": 14,
+      "killed": 2,
+      "new_leader": 3,
+      "election_ms": 195.811,
+      "write_unavailable_ms": 207.378,
+      "jobs_committed_before_kill": 20,
+      "committed_jobs_lost": 0
+    },
+    {
+      "trial": 15,
+      "killed": 1,
+      "new_leader": 3,
+      "election_ms": 496.188,
+      "write_unavailable_ms": 508.402,
+      "jobs_committed_before_kill": 20,
+      "committed_jobs_lost": 0
+    },
+    {
+      "trial": 16,
+      "killed": 1,
+      "new_leader": 2,
+      "election_ms": 258.765,
+      "write_unavailable_ms": 271.538,
+      "jobs_committed_before_kill": 20,
+      "committed_jobs_lost": 0
+    },
+    {
+      "trial": 17,
+      "killed": 3,
+      "new_leader": 1,
+      "election_ms": 297.925,
+      "write_unavailable_ms": 309.328,
+      "jobs_committed_before_kill": 20,
+      "committed_jobs_lost": 0
+    },
+    {
+      "trial": 18,
+      "killed": 1,
+      "new_leader": 2,
+      "election_ms": 200.895,
+      "write_unavailable_ms": 209.07,
+      "jobs_committed_before_kill": 20,
+      "committed_jobs_lost": 0
+    },
+    {
+      "trial": 19,
+      "killed": 1,
+      "new_leader": 3,
+      "election_ms": 190.017,
+      "write_unavailable_ms": 202.065,
+      "jobs_committed_before_kill": 20,
+      "committed_jobs_lost": 0
+    },
+    {
+      "trial": 20,
+      "killed": 1,
+      "new_leader": 2,
+      "election_ms": 178.895,
+      "write_unavailable_ms": 188.085,
+      "jobs_committed_before_kill": 20,
+      "committed_jobs_lost": 0
+    },
+    {
+      "trial": 21,
+      "killed": 1,
+      "new_leader": 3,
+      "election_ms": 209.117,
+      "write_unavailable_ms": 221.302,
+      "jobs_committed_before_kill": 20,
+      "committed_jobs_lost": 0
+    },
+    {
+      "trial": 22,
+      "killed": 2,
+      "new_leader": 1,
+      "election_ms": 170.511,
+      "write_unavailable_ms": 179.74,
+      "jobs_committed_before_kill": 20,
+      "committed_jobs_lost": 0
+    },
+    {
+      "trial": 23,
+      "killed": 3,
+      "new_leader": 2,
+      "election_ms": 160.74,
+      "write_unavailable_ms": 170.221,
+      "jobs_committed_before_kill": 20,
+      "committed_jobs_lost": 0
+    },
+    {
+      "trial": 24,
+      "killed": 2,
+      "new_leader": 3,
+      "election_ms": 157.852,
+      "write_unavailable_ms": 169.999,
+      "jobs_committed_before_kill": 20,
+      "committed_jobs_lost": 0
+    },
+    {
+      "trial": 25,
+      "killed": 3,
+      "new_leader": 1,
+      "election_ms": 276.961,
+      "write_unavailable_ms": 293.063,
+      "jobs_committed_before_kill": 20,
+      "committed_jobs_lost": 0
+    },
+    {
+      "trial": 26,
+      "killed": 2,
+      "new_leader": 3,
+      "election_ms": 176.094,
+      "write_unavailable_ms": 188.358,
+      "jobs_committed_before_kill": 20,
+      "committed_jobs_lost": 0
+    },
+    {
+      "trial": 27,
+      "killed": 1,
+      "new_leader": 3,
+      "election_ms": 246.14,
+      "write_unavailable_ms": 257.078,
+      "jobs_committed_before_kill": 20,
+      "committed_jobs_lost": 0
+    },
+    {
+      "trial": 28,
+      "killed": 1,
+      "new_leader": 3,
+      "election_ms": 169.747,
+      "write_unavailable_ms": 177.844,
+      "jobs_committed_before_kill": 20,
+      "committed_jobs_lost": 0
+    },
+    {
+      "trial": 29,
+      "killed": 2,
+      "new_leader": 1,
+      "election_ms": 194.33,
+      "write_unavailable_ms": 205.2,
+      "jobs_committed_before_kill": 20,
+      "committed_jobs_lost": 0
+    },
+    {
+      "trial": 30,
+      "killed": 2,
+      "new_leader": 1,
+      "election_ms": 234.132,
+      "write_unavailable_ms": 242.056,
+      "jobs_committed_before_kill": 20,
+      "committed_jobs_lost": 0
+    }
+  ],
+  "election_p50_ms": 195.8,
+  "election_p99_ms": 496.2,
+  "election_max_ms": 496.2,
+  "write_unavailable_p50_ms": 207.4,
+  "write_unavailable_p99_ms": 508.4,
+  "write_unavailable_max_ms": 508.4,
+  "committed_jobs_lost": 0,
+  "config": {
+    "election_timeout_ms": "150-300 randomized",
+    "heartbeat_ms": 30,
+    "replicas": 3,
+    "tick_ms": 10,
+    "transport": "HTTP/1.1 over loopback",
+    "wal": "fsync per write"
+  }
+}

@@ -1,0 +1,46 @@
+# Three control-plane replicas and two connected region agents.
+#   docker compose up --build
+#   docker compose exec cp1 airlock status -control http://cp1:7001
+x-node: &node
+  build: .
+  depends_on:
+    keys:
+      condition: service_completed_successfully
+  volumes:
+    - keys:/keys:ro
+
+services:
+  keys:
+    build: .
+    user: root
+    entrypoint: ["sh", "-c", "test -f /keys/release.key || airlock keygen -out /keys; chmod 644 /keys/*"]
+    volumes:
+      - keys:/keys
+
+  cp1:
+    <<: *node
+    command: ["node", "-id", "1", "-listen", ":7001", "-data", "/tmp/data", "-keys", "/keys",
+              "-peers", "1=http://cp1:7001,2=http://cp2:7002,3=http://cp3:7003"]
+    ports: ["7001:7001"]
+  cp2:
+    <<: *node
+    command: ["node", "-id", "2", "-listen", ":7002", "-data", "/tmp/data", "-keys", "/keys",
+              "-peers", "1=http://cp1:7001,2=http://cp2:7002,3=http://cp3:7003"]
+    ports: ["7002:7002"]
+  cp3:
+    <<: *node
+    command: ["node", "-id", "3", "-listen", ":7003", "-data", "/tmp/data", "-keys", "/keys",
+              "-peers", "1=http://cp1:7001,2=http://cp2:7002,3=http://cp3:7003"]
+    ports: ["7003:7003"]
+
+  agent-us-east:
+    <<: *node
+    command: ["agent", "-region", "us-east", "-keys", "/keys", "-ledger", "/tmp/us-east.ledger",
+              "-control", "http://cp1:7001,http://cp2:7002,http://cp3:7003"]
+  agent-eu-west:
+    <<: *node
+    command: ["agent", "-region", "eu-west", "-keys", "/keys", "-ledger", "/tmp/eu-west.ledger",
+              "-control", "http://cp1:7001,http://cp2:7002,http://cp3:7003"]
+
+volumes:
+  keys:

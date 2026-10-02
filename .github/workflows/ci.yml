@@ -1,0 +1,32 @@
+name: ci
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.26'
+      - name: vet and format
+        run: |
+          go vet ./...
+          test -z "$(gofmt -l .)"
+      - name: test
+        run: go test ./...
+      - name: race
+        run: go test -race ./...
+      - name: multi-process end to end
+        run: make e2e
+      - name: benchmark invariants
+        run: go run ./cmd/airlock bench -out /tmp/bench.json
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t airlock .
+      - run: docker run --rm airlock demo -out /tmp/demo.json

@@ -1,0 +1,5 @@
+bin/
+*.ledger
+data*/
+keys/
+*.wal

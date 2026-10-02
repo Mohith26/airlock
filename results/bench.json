@@ -1,0 +1,111 @@
+{
+  "config": {
+    "seed": 11,
+    "jobs": 10000,
+    "releases": 40,
+    "duplicate_submit_rate": 0.1,
+    "worker_crash_rate": 0.01,
+    "cache_corruption_rate": 0.01,
+    "package_tamper_rate": 0.1,
+    "leader_kill_every_ticks": 1500,
+    "node_down_ticks": 400,
+    "partition_every_ticks": 1200,
+    "partition_ticks": 500,
+    "raft_message_drop_rate": 0.01
+  },
+  "environment": {
+    "go_version": "go1.26.3",
+    "goos": "darwin",
+    "goarch": "arm64",
+    "cpus": 18
+  },
+  "topology": {
+    "control_plane_replicas": 3,
+    "connected_regions": [
+      "us-east",
+      "us-west",
+      "eu-west",
+      "ap-south"
+    ],
+    "air_gapped_regions": [
+      "adc-1"
+    ],
+    "tick_ms": 10
+  },
+  "simulated_seconds": 102.04,
+  "wall_seconds": 1.49,
+  "jobs_per_wall_second": 6710,
+  "jobs": {
+    "unique": 10000,
+    "by_status": {
+      "succeeded": 6675,
+      "superseded": 3325
+    },
+    "still_pending": 0,
+    "installs_performed": 6675,
+    "double_executions": 0
+  },
+  "faults_injected": {
+    "leader_kills": 7,
+    "region_partitions": 8,
+    "worker_crashes": 109,
+    "cache_corruptions": 113,
+    "packages_tampered": 13,
+    "duplicate_submits_sent": 985,
+    "raft_messages_sent": 5627071,
+    "raft_messages_dropped": 74072
+  },
+  "outcomes": {
+    "duplicate_submits_suppressed": 985,
+    "duplicate_deliveries_suppressed": 1884,
+    "duplicate_acks_ignored": 1752,
+    "corrupt_cached_artifacts_rejected": 100,
+    "clean_refetches": 100,
+    "tampered_packages_rejected": 13,
+    "stale_generations_rejected": 0,
+    "corrupt_artifacts_installed": 0
+  },
+  "failover": {
+    "count": 7,
+    "election": {
+      "n": 7,
+      "p50_ms": 240,
+      "p90_ms": 520,
+      "p99_ms": 520,
+      "max_ms": 520
+    },
+    "write_unavailable": {
+      "n": 7,
+      "p50_ms": 260,
+      "p90_ms": 540,
+      "p99_ms": 540,
+      "max_ms": 540
+    }
+  },
+  "commit_latency": {
+    "n": 22777,
+    "p50_ms": 30,
+    "p90_ms": 30,
+    "p99_ms": 30,
+    "max_ms": 560
+  },
+  "submit_to_confirmed": {
+    "n": 6675,
+    "p50_ms": 90,
+    "p90_ms": 100,
+    "p99_ms": 1070,
+    "max_ms": 5280
+  },
+  "partition_reconnect_to_converged": {
+    "n": 8,
+    "p50_ms": 80,
+    "p90_ms": 380,
+    "p99_ms": 380,
+    "max_ms": 380
+  },
+  "replicas_identical": true,
+  "state_digest": "6026eeb75d928c5ee230c1d25282422a5cf12a68ed00e3122cc5ad027d99664c",
+  "audit_events": 30252,
+  "audit_chain_verified": true,
+  "all_regions_converged": true
+}

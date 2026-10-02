@@ -1,0 +1,3537 @@
+{
+  "seed": 7,
+  "tick_ms": 10,
+  "steps": [
+    {
+      "id": "form",
+      "title": "Three control-plane replicas elect a leader",
+      "narration": "Each replica starts as a follower with a randomized election timer. The first to time out asks for votes and wins a majority.",
+      "start_ms": 0,
+      "end_ms": 280,
+      "frames": [
+        {
+          "tick": 18,
+          "ms": 180,
+          "leader": 3,
+          "nodes": [
+            {
+              "id": 1,
+              "name": "cp-1",
+              "state": "follower",
+              "term": 1,
+              "commit": 0,
+              "applied": 0
+            },
+            {
+              "id": 2,
+              "name": "cp-2",
+              "state": "follower",
+              "term": 1,
+              "commit": 0,
+              "applied": 0
+            },
+            {
+              "id": 3,
+              "name": "cp-3",
+              "state": "leader",
+              "term": 1,
+              "commit": 0,
+              "applied": 0
+            }
+          ],
+          "regions": [
+            {
+              "name": "adc-1",
+              "mode": "air-gapped",
+              "worker": "running",
+              "desired_version": "",
+              "desired_generation": 0,
+              "confirmed_version": "",
+              "confirmed_generation": 0,
+              "running_version": "",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 0,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "eu-west",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "",
+              "desired_generation": 0,
+              "confirmed_version": "",
+              "confirmed_generation": 0,
+              "running_version": "",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 0,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "us-east",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "",
+              "desired_generation": 0,
+              "confirmed_version": "",
+              "confirmed_generation": 0,
+              "running_version": "",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 0,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            }
+          ],
+          "jobs": {},
+          "audit_events": 1,
+          "audit_head": "6466373b3329811b",
+          "events": [
+            {
+              "tick": 18,
+              "ms": 180,
+              "type": "leader.elected",
+              "details": {
+                "node": "3",
+                "term": "1"
+              }
+            }
+          ]
+        }
+      ],
+      "facts": {
+        "elected_after_ms": "180",
+        "leader": "cp-3"
+      }
+    },
+    {
+      "id": "deploy",
+      "title": "Sign payments-api 1.4.2 and roll it out",
+      "narration": "The release is signed with an Ed25519 key. Connected regions pull it; the air-gapped region receives it as a signed offline package. Every region verifies the signature and SHA-256 digest itself before installing.",
+      "start_ms": 280,
+      "end_ms": 1230,
+      "frames": [
+        {
+          "tick": 31,
+          "ms": 310,
+          "leader": 3,
+          "nodes": [
+            {
+              "id": 1,
+              "name": "cp-1",
+              "state": "follower",
+              "term": 1,
+              "commit": 1,
+              "applied": 1
+            },
+            {
+              "id": 2,
+              "name": "cp-2",
+              "state": "follower",
+              "term": 1,
+              "commit": 1,
+              "applied": 1
+            },
+            {
+              "id": 3,
+              "name": "cp-3",
+              "state": "leader",
+              "term": 1,
+              "commit": 5,
+              "applied": 5
+            }
+          ],
+          "regions": [
+            {
+              "name": "adc-1",
+              "mode": "air-gapped",
+              "worker": "running",
+              "desired_version": "1.4.2",
+              "desired_generation": 1,
+              "confirmed_version": "",
+              "confirmed_generation": 0,
+              "running_version": "",
+              "pending_jobs": 1,
+              "buffered_acks": 0,
+              "executed": 0,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "eu-west",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.2",
+              "desired_generation": 1,
+              "confirmed_version": "",
+              "confirmed_generation": 0,
+              "running_version": "",
+              "pending_jobs": 1,
+              "buffered_acks": 0,
+              "executed": 0,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "us-east",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.2",
+              "desired_generation": 1,
+              "confirmed_version": "",
+              "confirmed_generation": 0,
+              "running_version": "",
+              "pending_jobs": 1,
+              "buffered_acks": 0,
+              "executed": 0,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            }
+          ],
+          "jobs": {
+            "pending": 3
+          },
+          "audit_events": 5,
+          "audit_head": "fc8c6c8d85e65273",
+          "events": [
+            {
+              "tick": 31,
+              "ms": 310,
+              "type": "release.registered"
+            },
+            {
+              "tick": 31,
+              "ms": 310,
+              "type": "job.committed",
+              "details": {
+                "generation": "1",
+                "job": "deploy-1.4.2-1",
+                "region": "us-east",
+                "version": "1.4.2"
+              }
+            },
+            {
+              "tick": 31,
+              "ms": 310,
+              "type": "job.committed",
+              "details": {
+                "generation": "1",
+                "job": "deploy-1.4.2-2",
+                "region": "eu-west",
+                "version": "1.4.2"
+              }
+            },
+            {
+              "tick": 31,
+              "ms": 310,
+              "type": "job.committed",
+              "details": {
+                "generation": "1",
+                "job": "deploy-1.4.2-3",
+                "region": "adc-1",
+                "version": "1.4.2"
+              }
+            }
+          ]
+        },
+        {
+          "tick": 35,
+          "ms": 350,
+          "leader": 3,
+          "nodes": [
+            {
+              "id": 1,
+              "name": "cp-1",
+              "state": "follower",
+              "term": 1,
+              "commit": 5,
+              "applied": 5
+            },
+            {
+              "id": 2,
+              "name": "cp-2",
+              "state": "follower",
+              "term": 1,
+              "commit": 5,
+              "applied": 5
+            },
+            {
+              "id": 3,
+              "name": "cp-3",
+              "state": "leader",
+              "term": 1,
+              "commit": 5,
+              "applied": 5
+            }
+          ],
+          "regions": [
+            {
+              "name": "adc-1",
+              "mode": "air-gapped",
+              "worker": "running",
+              "desired_version": "1.4.2",
+              "desired_generation": 1,
+              "confirmed_version": "",
+              "confirmed_generation": 0,
+              "running_version": "",
+              "pending_jobs": 1,
+              "buffered_acks": 0,
+              "executed": 0,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "eu-west",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.2",
+              "desired_generation": 1,
+              "confirmed_version": "",
+              "confirmed_generation": 0,
+              "running_version": "1.4.2",
+              "pending_jobs": 1,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "us-east",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.2",
+              "desired_generation": 1,
+              "confirmed_version": "",
+              "confirmed_generation": 0,
+              "running_version": "1.4.2",
+              "pending_jobs": 1,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            }
+          ],
+          "jobs": {
+            "pending": 3
+          },
+          "audit_events": 7,
+          "audit_head": "2b421a55fa748900",
+          "events": [
+            {
+              "tick": 35,
+              "ms": 350,
+              "type": "job.executed",
+              "details": {
+                "generation": "1",
+                "job": "deploy-1.4.2-2",
+                "region": "eu-west",
+                "version": "1.4.2"
+              }
+            },
+            {
+              "tick": 35,
+              "ms": 350,
+              "type": "job.executed",
+              "details": {
+                "generation": "1",
+                "job": "deploy-1.4.2-1",
+                "region": "us-east",
+                "version": "1.4.2"
+              }
+            }
+          ]
+        },
+        {
+          "tick": 38,
+          "ms": 380,
+          "leader": 3,
+          "nodes": [
+            {
+              "id": 1,
+              "name": "cp-1",
+              "state": "follower",
+              "term": 1,
+              "commit": 5,
+              "applied": 5
+            },
+            {
+              "id": 2,
+              "name": "cp-2",
+              "state": "follower",
+              "term": 1,
+              "commit": 5,
+              "applied": 5
+            },
+            {
+              "id": 3,
+              "name": "cp-3",
+              "state": "leader",
+              "term": 1,
+              "commit": 7,
+              "applied": 7
+            }
+          ],
+          "regions": [
+            {
+              "name": "adc-1",
+              "mode": "air-gapped",
+              "worker": "running",
+              "desired_version": "1.4.2",
+              "desired_generation": 1,
+              "confirmed_version": "",
+              "confirmed_generation": 0,
+              "running_version": "",
+              "pending_jobs": 1,
+              "buffered_acks": 0,
+              "executed": 0,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "eu-west",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.2",
+              "desired_generation": 1,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "us-east",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.2",
+              "desired_generation": 1,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            }
+          ],
+          "jobs": {
+            "pending": 1,
+            "succeeded": 2
+          },
+          "audit_events": 9,
+          "audit_head": "9da6c018d499949f",
+          "events": [
+            {
+              "tick": 38,
+              "ms": 380,
+              "type": "job.succeeded",
+              "details": {
+                "job": "deploy-1.4.2-2",
+                "region": "eu-west",
+                "version": "1.4.2"
+              }
+            },
+            {
+              "tick": 38,
+              "ms": 380,
+              "type": "job.succeeded",
+              "details": {
+                "job": "deploy-1.4.2-1",
+                "region": "us-east",
+                "version": "1.4.2"
+              }
+            }
+          ]
+        },
+        {
+          "tick": 60,
+          "ms": 600,
+          "leader": 3,
+          "nodes": [
+            {
+              "id": 1,
+              "name": "cp-1",
+              "state": "follower",
+              "term": 1,
+              "commit": 7,
+              "applied": 7
+            },
+            {
+              "id": 2,
+              "name": "cp-2",
+              "state": "follower",
+              "term": 1,
+              "commit": 7,
+              "applied": 7
+            },
+            {
+              "id": 3,
+              "name": "cp-3",
+              "state": "leader",
+              "term": 1,
+              "commit": 7,
+              "applied": 7
+            }
+          ],
+          "regions": [
+            {
+              "name": "adc-1",
+              "mode": "air-gapped",
+              "worker": "running",
+              "desired_version": "1.4.2",
+              "desired_generation": 1,
+              "confirmed_version": "",
+              "confirmed_generation": 0,
+              "running_version": "1.4.2",
+              "pending_jobs": 1,
+              "buffered_acks": 1,
+              "executed": 1,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "eu-west",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.2",
+              "desired_generation": 1,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "us-east",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.2",
+              "desired_generation": 1,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            }
+          ],
+          "jobs": {
+            "pending": 1,
+            "succeeded": 2
+          },
+          "audit_events": 11,
+          "audit_head": "2e18764b6adcd1a8",
+          "events": [
+            {
+              "tick": 60,
+              "ms": 600,
+              "type": "package.imported",
+              "details": {
+                "jobs": "1",
+                "region": "adc-1",
+                "sequence": "1"
+              }
+            },
+            {
+              "tick": 60,
+              "ms": 600,
+              "type": "job.executed",
+              "details": {
+                "generation": "1",
+                "job": "deploy-1.4.2-3",
+                "region": "adc-1",
+                "version": "1.4.2"
+              }
+            }
+          ]
+        },
+        {
+          "tick": 120,
+          "ms": 1200,
+          "leader": 3,
+          "nodes": [
+            {
+              "id": 1,
+              "name": "cp-1",
+              "state": "follower",
+              "term": 1,
+              "commit": 7,
+              "applied": 7
+            },
+            {
+              "id": 2,
+              "name": "cp-2",
+              "state": "follower",
+              "term": 1,
+              "commit": 7,
+              "applied": 7
+            },
+            {
+              "id": 3,
+              "name": "cp-3",
+              "state": "leader",
+              "term": 1,
+              "commit": 7,
+              "applied": 7
+            }
+          ],
+          "regions": [
+            {
+              "name": "adc-1",
+              "mode": "air-gapped",
+              "worker": "running",
+              "desired_version": "1.4.2",
+              "desired_generation": 1,
+              "confirmed_version": "",
+              "confirmed_generation": 0,
+              "running_version": "1.4.2",
+              "pending_jobs": 1,
+              "buffered_acks": 1,
+              "executed": 1,
+              "duplicates_suppressed": 1,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "eu-west",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.2",
+              "desired_generation": 1,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "us-east",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.2",
+              "desired_generation": 1,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            }
+          ],
+          "jobs": {
+            "pending": 1,
+            "succeeded": 2
+          },
+          "audit_events": 12,
+          "audit_head": "362cc147eb8acf3d",
+          "events": [
+            {
+              "tick": 120,
+              "ms": 1200,
+              "type": "package.imported",
+              "details": {
+                "jobs": "1",
+                "region": "adc-1",
+                "sequence": "2"
+              }
+            }
+          ]
+        },
+        {
+          "tick": 123,
+          "ms": 1230,
+          "leader": 3,
+          "nodes": [
+            {
+              "id": 1,
+              "name": "cp-1",
+              "state": "follower",
+              "term": 1,
+              "commit": 7,
+              "applied": 7
+            },
+            {
+              "id": 2,
+              "name": "cp-2",
+              "state": "follower",
+              "term": 1,
+              "commit": 7,
+              "applied": 7
+            },
+            {
+              "id": 3,
+              "name": "cp-3",
+              "state": "leader",
+              "term": 1,
+              "commit": 8,
+              "applied": 8
+            }
+          ],
+          "regions": [
+            {
+              "name": "adc-1",
+              "mode": "air-gapped",
+              "worker": "running",
+              "desired_version": "1.4.2",
+              "desired_generation": 1,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 0,
+              "buffered_acks": 1,
+              "executed": 1,
+              "duplicates_suppressed": 1,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "eu-west",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.2",
+              "desired_generation": 1,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "us-east",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.2",
+              "desired_generation": 1,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            }
+          ],
+          "jobs": {
+            "succeeded": 3
+          },
+          "audit_events": 13,
+          "audit_head": "ec9df0803710b236",
+          "events": [
+            {
+              "tick": 123,
+              "ms": 1230,
+              "type": "job.succeeded",
+              "details": {
+                "job": "deploy-1.4.2-3",
+                "region": "adc-1",
+                "version": "1.4.2"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "partition",
+      "title": "eu-west loses its network path",
+      "narration": "The region keeps running 1.4.2. Nothing it cannot verify will be installed, and anything sent to it waits in the replicated log.",
+      "start_ms": 1230,
+      "end_ms": 1430,
+      "frames": [
+        {
+          "tick": 124,
+          "ms": 1240,
+          "leader": 3,
+          "nodes": [
+            {
+              "id": 1,
+              "name": "cp-1",
+              "state": "follower",
+              "term": 1,
+              "commit": 8,
+              "applied": 8
+            },
+            {
+              "id": 2,
+              "name": "cp-2",
+              "state": "follower",
+              "term": 1,
+              "commit": 8,
+              "applied": 8
+            },
+            {
+              "id": 3,
+              "name": "cp-3",
+              "state": "leader",
+              "term": 1,
+              "commit": 8,
+              "applied": 8
+            }
+          ],
+          "regions": [
+            {
+              "name": "adc-1",
+              "mode": "air-gapped",
+              "worker": "running",
+              "desired_version": "1.4.2",
+              "desired_generation": 1,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 0,
+              "buffered_acks": 1,
+              "executed": 1,
+              "duplicates_suppressed": 1,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "eu-west",
+              "mode": "partitioned",
+              "worker": "running",
+              "desired_version": "1.4.2",
+              "desired_generation": 1,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "us-east",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.2",
+              "desired_generation": 1,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            }
+          ],
+          "jobs": {
+            "succeeded": 3
+          },
+          "audit_events": 14,
+          "audit_head": "92e9a311ba29f419",
+          "events": [
+            {
+              "tick": 123,
+              "ms": 1230,
+              "type": "fault.region_partitioned",
+              "details": {
+                "region": "eu-west"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "failover",
+      "title": "The leader crashes mid-rollout",
+      "narration": "With one of three replicas gone, the remaining two still form a majority. One times out, wins the election, commits a no-op in its new term, and starts accepting writes.",
+      "start_ms": 1430,
+      "end_ms": 1820,
+      "frames": [
+        {
+          "tick": 144,
+          "ms": 1440,
+          "leader": 0,
+          "nodes": [
+            {
+              "id": 1,
+              "name": "cp-1",
+              "state": "follower",
+              "term": 1,
+              "commit": 8,
+              "applied": 8
+            },
+            {
+              "id": 2,
+              "name": "cp-2",
+              "state": "follower",
+              "term": 1,
+              "commit": 8,
+              "applied": 8
+            },
+            {
+              "id": 3,
+              "name": "cp-3",
+              "state": "down",
+              "term": 1,
+              "commit": 8,
+              "applied": 8
+            }
+          ],
+          "regions": [
+            {
+              "name": "adc-1",
+              "mode": "air-gapped",
+              "worker": "running",
+              "desired_version": "1.4.2",
+              "desired_generation": 1,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 0,
+              "buffered_acks": 1,
+              "executed": 1,
+              "duplicates_suppressed": 1,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "eu-west",
+              "mode": "partitioned",
+              "worker": "running",
+              "desired_version": "1.4.2",
+              "desired_generation": 1,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "us-east",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.2",
+              "desired_generation": 1,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            }
+          ],
+          "jobs": {
+            "succeeded": 3
+          },
+          "audit_events": 15,
+          "audit_head": "e31cdbd9c9061938",
+          "events": [
+            {
+              "tick": 143,
+              "ms": 1430,
+              "type": "fault.leader_killed",
+              "details": {
+                "node": "3"
+              }
+            }
+          ]
+        },
+        {
+          "tick": 170,
+          "ms": 1700,
+          "leader": 2,
+          "nodes": [
+            {
+              "id": 1,
+              "name": "cp-1",
+              "state": "follower",
+              "term": 2,
+              "commit": 8,
+              "applied": 8
+            },
+            {
+              "id": 2,
+              "name": "cp-2",
+              "state": "leader",
+              "term": 2,
+              "commit": 8,
+              "applied": 8
+            },
+            {
+              "id": 3,
+              "name": "cp-3",
+              "state": "down",
+              "term": 1,
+              "commit": 8,
+              "applied": 8
+            }
+          ],
+          "regions": [
+            {
+              "name": "adc-1",
+              "mode": "air-gapped",
+              "worker": "running",
+              "desired_version": "1.4.2",
+              "desired_generation": 1,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 0,
+              "buffered_acks": 1,
+              "executed": 1,
+              "duplicates_suppressed": 1,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "eu-west",
+              "mode": "partitioned",
+              "worker": "running",
+              "desired_version": "1.4.2",
+              "desired_generation": 1,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "us-east",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.2",
+              "desired_generation": 1,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            }
+          ],
+          "jobs": {
+            "succeeded": 3
+          },
+          "audit_events": 16,
+          "audit_head": "367efd54001d5034",
+          "events": [
+            {
+              "tick": 170,
+              "ms": 1700,
+              "type": "leader.elected",
+              "details": {
+                "node": "2",
+                "term": "2"
+              }
+            }
+          ]
+        }
+      ],
+      "facts": {
+        "election_ms": "270",
+        "killed": "cp-3",
+        "new_leader": "cp-2",
+        "write_unavailable_ms": "290"
+      }
+    },
+    {
+      "id": "degraded",
+      "title": "Roll out 1.4.3 with a dead replica and a dark region",
+      "narration": "us-east confirms right away through the new leader. eu-west cannot be reached, so its job stays pending in the log. adc-1 gets it on the next courier trip.",
+      "start_ms": 1820,
+      "end_ms": 1880,
+      "frames": [
+        {
+          "tick": 183,
+          "ms": 1830,
+          "leader": 2,
+          "nodes": [
+            {
+              "id": 1,
+              "name": "cp-1",
+              "state": "follower",
+              "term": 2,
+              "commit": 9,
+              "applied": 9
+            },
+            {
+              "id": 2,
+              "name": "cp-2",
+              "state": "leader",
+              "term": 2,
+              "commit": 10,
+              "applied": 10
+            },
+            {
+              "id": 3,
+              "name": "cp-3",
+              "state": "down",
+              "term": 1,
+              "commit": 8,
+              "applied": 8
+            }
+          ],
+          "regions": [
+            {
+              "name": "adc-1",
+              "mode": "air-gapped",
+              "worker": "running",
+              "desired_version": "1.4.2",
+              "desired_generation": 1,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 1,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "eu-west",
+              "mode": "partitioned",
+              "worker": "running",
+              "desired_version": "1.4.2",
+              "desired_generation": 1,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "us-east",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.2",
+              "desired_generation": 1,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            }
+          ],
+          "jobs": {
+            "succeeded": 3
+          },
+          "audit_events": 17,
+          "audit_head": "8ba7aed80aa024a7",
+          "events": [
+            {
+              "tick": 183,
+              "ms": 1830,
+              "type": "ack.duplicate_ignored",
+              "details": {
+                "job": "deploy-1.4.2-3"
+              }
+            }
+          ]
+        },
+        {
+          "tick": 185,
+          "ms": 1850,
+          "leader": 2,
+          "nodes": [
+            {
+              "id": 1,
+              "name": "cp-1",
+              "state": "follower",
+              "term": 2,
+              "commit": 10,
+              "applied": 10
+            },
+            {
+              "id": 2,
+              "name": "cp-2",
+              "state": "leader",
+              "term": 2,
+              "commit": 14,
+              "applied": 14
+            },
+            {
+              "id": 3,
+              "name": "cp-3",
+              "state": "down",
+              "term": 1,
+              "commit": 8,
+              "applied": 8
+            }
+          ],
+          "regions": [
+            {
+              "name": "adc-1",
+              "mode": "air-gapped",
+              "worker": "running",
+              "desired_version": "1.4.3",
+              "desired_generation": 2,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 1,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 1,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "eu-west",
+              "mode": "partitioned",
+              "worker": "running",
+              "desired_version": "1.4.3",
+              "desired_generation": 2,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 1,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "us-east",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.3",
+              "desired_generation": 2,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.3",
+              "pending_jobs": 1,
+              "buffered_acks": 0,
+              "executed": 2,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            }
+          ],
+          "jobs": {
+            "pending": 3,
+            "succeeded": 3
+          },
+          "audit_events": 22,
+          "audit_head": "41142cc9b3eb8ee5",
+          "events": [
+            {
+              "tick": 185,
+              "ms": 1850,
+              "type": "release.registered"
+            },
+            {
+              "tick": 185,
+              "ms": 1850,
+              "type": "job.committed",
+              "details": {
+                "generation": "2",
+                "job": "deploy-1.4.3-1",
+                "region": "us-east",
+                "version": "1.4.3"
+              }
+            },
+            {
+              "tick": 185,
+              "ms": 1850,
+              "type": "job.committed",
+              "details": {
+                "generation": "2",
+                "job": "deploy-1.4.3-2",
+                "region": "eu-west",
+                "version": "1.4.3"
+              }
+            },
+            {
+              "tick": 185,
+              "ms": 1850,
+              "type": "job.committed",
+              "details": {
+                "generation": "2",
+                "job": "deploy-1.4.3-3",
+                "region": "adc-1",
+                "version": "1.4.3"
+              }
+            },
+            {
+              "tick": 185,
+              "ms": 1850,
+              "type": "job.executed",
+              "details": {
+                "generation": "2",
+                "job": "deploy-1.4.3-1",
+                "region": "us-east",
+                "version": "1.4.3"
+              }
+            }
+          ]
+        },
+        {
+          "tick": 188,
+          "ms": 1880,
+          "leader": 2,
+          "nodes": [
+            {
+              "id": 1,
+              "name": "cp-1",
+              "state": "follower",
+              "term": 2,
+              "commit": 14,
+              "applied": 14
+            },
+            {
+              "id": 2,
+              "name": "cp-2",
+              "state": "leader",
+              "term": 2,
+              "commit": 15,
+              "applied": 15
+            },
+            {
+              "id": 3,
+              "name": "cp-3",
+              "state": "down",
+              "term": 1,
+              "commit": 8,
+              "applied": 8
+            }
+          ],
+          "regions": [
+            {
+              "name": "adc-1",
+              "mode": "air-gapped",
+              "worker": "running",
+              "desired_version": "1.4.3",
+              "desired_generation": 2,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 1,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 1,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "eu-west",
+              "mode": "partitioned",
+              "worker": "running",
+              "desired_version": "1.4.3",
+              "desired_generation": 2,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 1,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "us-east",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.3",
+              "desired_generation": 2,
+              "confirmed_version": "1.4.3",
+              "confirmed_generation": 2,
+              "running_version": "1.4.3",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 2,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            }
+          ],
+          "jobs": {
+            "pending": 2,
+            "succeeded": 4
+          },
+          "audit_events": 23,
+          "audit_head": "4b6709edc1c38b6b",
+          "events": [
+            {
+              "tick": 188,
+              "ms": 1880,
+              "type": "job.succeeded",
+              "details": {
+                "job": "deploy-1.4.3-1",
+                "region": "us-east",
+                "version": "1.4.3"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "duplicate",
+      "title": "A client retries the same request",
+      "narration": "The operator's CLI times out and resends deploy-1.4.3-1. The job id is the idempotency key, so the replicated state machine records it once and ignores the copy.",
+      "start_ms": 1880,
+      "end_ms": 2010,
+      "frames": [
+        {
+          "tick": 191,
+          "ms": 1910,
+          "leader": 2,
+          "nodes": [
+            {
+              "id": 1,
+              "name": "cp-1",
+              "state": "follower",
+              "term": 2,
+              "commit": 15,
+              "applied": 15
+            },
+            {
+              "id": 2,
+              "name": "cp-2",
+              "state": "leader",
+              "term": 2,
+              "commit": 16,
+              "applied": 16
+            },
+            {
+              "id": 3,
+              "name": "cp-3",
+              "state": "down",
+              "term": 1,
+              "commit": 8,
+              "applied": 8
+            }
+          ],
+          "regions": [
+            {
+              "name": "adc-1",
+              "mode": "air-gapped",
+              "worker": "running",
+              "desired_version": "1.4.3",
+              "desired_generation": 2,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 1,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 1,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "eu-west",
+              "mode": "partitioned",
+              "worker": "running",
+              "desired_version": "1.4.3",
+              "desired_generation": 2,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 1,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "us-east",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.3",
+              "desired_generation": 2,
+              "confirmed_version": "1.4.3",
+              "confirmed_generation": 2,
+              "running_version": "1.4.3",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 2,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            }
+          ],
+          "jobs": {
+            "pending": 2,
+            "succeeded": 4
+          },
+          "audit_events": 24,
+          "audit_head": "3c036281a6fb389a",
+          "events": [
+            {
+              "tick": 191,
+              "ms": 1910,
+              "type": "job.duplicate_submit_suppressed",
+              "details": {
+                "job": "deploy-1.4.3-1"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "crash",
+      "title": "us-east's worker dies after installing, before reporting back",
+      "narration": "This is the moment that causes double deploys. The agent wrote the result to its local ledger before acknowledging, so when it restarts and sees the job still pending it reports the recorded result instead of running it again.",
+      "start_ms": 2010,
+      "end_ms": 2380,
+      "frames": [
+        {
+          "tick": 202,
+          "ms": 2020,
+          "leader": 2,
+          "nodes": [
+            {
+              "id": 1,
+              "name": "cp-1",
+              "state": "follower",
+              "term": 2,
+              "commit": 16,
+              "applied": 16
+            },
+            {
+              "id": 2,
+              "name": "cp-2",
+              "state": "leader",
+              "term": 2,
+              "commit": 16,
+              "applied": 16
+            },
+            {
+              "id": 3,
+              "name": "cp-3",
+              "state": "down",
+              "term": 1,
+              "commit": 8,
+              "applied": 8
+            }
+          ],
+          "regions": [
+            {
+              "name": "adc-1",
+              "mode": "air-gapped",
+              "worker": "running",
+              "desired_version": "1.4.3",
+              "desired_generation": 2,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 1,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 1,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "eu-west",
+              "mode": "partitioned",
+              "worker": "running",
+              "desired_version": "1.4.3",
+              "desired_generation": 2,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 1,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "us-east",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.3",
+              "desired_generation": 2,
+              "confirmed_version": "1.4.3",
+              "confirmed_generation": 2,
+              "running_version": "1.4.3",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 2,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            }
+          ],
+          "jobs": {
+            "pending": 2,
+            "succeeded": 4
+          },
+          "audit_events": 25,
+          "audit_head": "54e68a84014ef27a",
+          "events": [
+            {
+              "tick": 201,
+              "ms": 2010,
+              "type": "fault.worker_crash_armed",
+              "details": {
+                "region": "us-east"
+              }
+            }
+          ]
+        },
+        {
+          "tick": 204,
+          "ms": 2040,
+          "leader": 2,
+          "nodes": [
+            {
+              "id": 1,
+              "name": "cp-1",
+              "state": "follower",
+              "term": 2,
+              "commit": 16,
+              "applied": 16
+            },
+            {
+              "id": 2,
+              "name": "cp-2",
+              "state": "leader",
+              "term": 2,
+              "commit": 18,
+              "applied": 18
+            },
+            {
+              "id": 3,
+              "name": "cp-3",
+              "state": "down",
+              "term": 1,
+              "commit": 8,
+              "applied": 8
+            }
+          ],
+          "regions": [
+            {
+              "name": "adc-1",
+              "mode": "air-gapped",
+              "worker": "running",
+              "desired_version": "1.4.3",
+              "desired_generation": 2,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 1,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 1,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "eu-west",
+              "mode": "partitioned",
+              "worker": "running",
+              "desired_version": "1.4.3",
+              "desired_generation": 2,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 1,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "us-east",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.4",
+              "desired_generation": 3,
+              "confirmed_version": "1.4.3",
+              "confirmed_generation": 2,
+              "running_version": "1.4.3",
+              "pending_jobs": 1,
+              "buffered_acks": 0,
+              "executed": 2,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            }
+          ],
+          "jobs": {
+            "pending": 3,
+            "succeeded": 4
+          },
+          "audit_events": 27,
+          "audit_head": "dc533d6fe96ad346",
+          "events": [
+            {
+              "tick": 204,
+              "ms": 2040,
+              "type": "release.registered"
+            },
+            {
+              "tick": 204,
+              "ms": 2040,
+              "type": "job.committed",
+              "details": {
+                "generation": "3",
+                "job": "deploy-1.4.4-1",
+                "region": "us-east",
+                "version": "1.4.4"
+              }
+            }
+          ]
+        },
+        {
+          "tick": 205,
+          "ms": 2050,
+          "leader": 2,
+          "nodes": [
+            {
+              "id": 1,
+              "name": "cp-1",
+              "state": "follower",
+              "term": 2,
+              "commit": 18,
+              "applied": 18
+            },
+            {
+              "id": 2,
+              "name": "cp-2",
+              "state": "leader",
+              "term": 2,
+              "commit": 18,
+              "applied": 18
+            },
+            {
+              "id": 3,
+              "name": "cp-3",
+              "state": "down",
+              "term": 1,
+              "commit": 8,
+              "applied": 8
+            }
+          ],
+          "regions": [
+            {
+              "name": "adc-1",
+              "mode": "air-gapped",
+              "worker": "running",
+              "desired_version": "1.4.3",
+              "desired_generation": 2,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 1,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 1,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "eu-west",
+              "mode": "partitioned",
+              "worker": "running",
+              "desired_version": "1.4.3",
+              "desired_generation": 2,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 1,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "us-east",
+              "mode": "connected",
+              "worker": "crashed",
+              "desired_version": "1.4.4",
+              "desired_generation": 3,
+              "confirmed_version": "1.4.3",
+              "confirmed_generation": 2,
+              "running_version": "1.4.4",
+              "pending_jobs": 1,
+              "buffered_acks": 0,
+              "executed": 3,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            }
+          ],
+          "jobs": {
+            "pending": 3,
+            "succeeded": 4
+          },
+          "audit_events": 29,
+          "audit_head": "4eb5ec1375a63d7d",
+          "events": [
+            {
+              "tick": 205,
+              "ms": 2050,
+              "type": "job.executed",
+              "details": {
+                "generation": "3",
+                "job": "deploy-1.4.4-1",
+                "region": "us-east",
+                "version": "1.4.4"
+              }
+            },
+            {
+              "tick": 205,
+              "ms": 2050,
+              "type": "worker.crashed",
+              "details": {
+                "job": "deploy-1.4.4-1",
+                "region": "us-east",
+                "when": "after install, before ack"
+              }
+            }
+          ]
+        },
+        {
+          "tick": 235,
+          "ms": 2350,
+          "leader": 2,
+          "nodes": [
+            {
+              "id": 1,
+              "name": "cp-1",
+              "state": "follower",
+              "term": 2,
+              "commit": 18,
+              "applied": 18
+            },
+            {
+              "id": 2,
+              "name": "cp-2",
+              "state": "leader",
+              "term": 2,
+              "commit": 18,
+              "applied": 18
+            },
+            {
+              "id": 3,
+              "name": "cp-3",
+              "state": "down",
+              "term": 1,
+              "commit": 8,
+              "applied": 8
+            }
+          ],
+          "regions": [
+            {
+              "name": "adc-1",
+              "mode": "air-gapped",
+              "worker": "running",
+              "desired_version": "1.4.3",
+              "desired_generation": 2,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 1,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 1,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "eu-west",
+              "mode": "partitioned",
+              "worker": "running",
+              "desired_version": "1.4.3",
+              "desired_generation": 2,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 1,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "us-east",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.4",
+              "desired_generation": 3,
+              "confirmed_version": "1.4.3",
+              "confirmed_generation": 2,
+              "running_version": "1.4.4",
+              "pending_jobs": 1,
+              "buffered_acks": 0,
+              "executed": 3,
+              "duplicates_suppressed": 1,
+              "artifacts_rejected": 0
+            }
+          ],
+          "jobs": {
+            "pending": 3,
+            "succeeded": 4
+          },
+          "audit_events": 31,
+          "audit_head": "9aa0d04f61418bb8",
+          "events": [
+            {
+              "tick": 235,
+              "ms": 2350,
+              "type": "worker.restarted",
+              "details": {
+                "region": "us-east"
+              }
+            },
+            {
+              "tick": 235,
+              "ms": 2350,
+              "type": "job.duplicate_suppressed",
+              "details": {
+                "job": "deploy-1.4.4-1",
+                "region": "us-east",
+                "version": "1.4.4"
+              }
+            }
+          ]
+        },
+        {
+          "tick": 238,
+          "ms": 2380,
+          "leader": 2,
+          "nodes": [
+            {
+              "id": 1,
+              "name": "cp-1",
+              "state": "follower",
+              "term": 2,
+              "commit": 18,
+              "applied": 18
+            },
+            {
+              "id": 2,
+              "name": "cp-2",
+              "state": "leader",
+              "term": 2,
+              "commit": 19,
+              "applied": 19
+            },
+            {
+              "id": 3,
+              "name": "cp-3",
+              "state": "down",
+              "term": 1,
+              "commit": 8,
+              "applied": 8
+            }
+          ],
+          "regions": [
+            {
+              "name": "adc-1",
+              "mode": "air-gapped",
+              "worker": "running",
+              "desired_version": "1.4.3",
+              "desired_generation": 2,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 1,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 1,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "eu-west",
+              "mode": "partitioned",
+              "worker": "running",
+              "desired_version": "1.4.3",
+              "desired_generation": 2,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 1,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "us-east",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.4",
+              "desired_generation": 3,
+              "confirmed_version": "1.4.4",
+              "confirmed_generation": 3,
+              "running_version": "1.4.4",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 3,
+              "duplicates_suppressed": 1,
+              "artifacts_rejected": 0
+            }
+          ],
+          "jobs": {
+            "pending": 2,
+            "succeeded": 5
+          },
+          "audit_events": 32,
+          "audit_head": "f80b66bfed7be162",
+          "events": [
+            {
+              "tick": 238,
+              "ms": 2380,
+              "type": "job.succeeded",
+              "details": {
+                "job": "deploy-1.4.4-1",
+                "region": "us-east",
+                "version": "1.4.4"
+              }
+            }
+          ]
+        }
+      ],
+      "facts": {
+        "executions_of_deploy_1.4.4_1": "1"
+      }
+    },
+    {
+      "id": "tamper",
+      "title": "A package is altered on its way into adc-1",
+      "narration": "One byte of the artifact changes in transit. The signed manifest still says what the bytes must hash to, so adc-1 rejects the whole package and installs nothing. The next clean package goes through.",
+      "start_ms": 2380,
+      "end_ms": 3630,
+      "frames": [
+        {
+          "tick": 239,
+          "ms": 2390,
+          "leader": 2,
+          "nodes": [
+            {
+              "id": 1,
+              "name": "cp-1",
+              "state": "follower",
+              "term": 2,
+              "commit": 19,
+              "applied": 19
+            },
+            {
+              "id": 2,
+              "name": "cp-2",
+              "state": "leader",
+              "term": 2,
+              "commit": 19,
+              "applied": 19
+            },
+            {
+              "id": 3,
+              "name": "cp-3",
+              "state": "down",
+              "term": 1,
+              "commit": 8,
+              "applied": 8
+            }
+          ],
+          "regions": [
+            {
+              "name": "adc-1",
+              "mode": "air-gapped",
+              "worker": "running",
+              "desired_version": "1.4.3",
+              "desired_generation": 2,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 1,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 1,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "eu-west",
+              "mode": "partitioned",
+              "worker": "running",
+              "desired_version": "1.4.3",
+              "desired_generation": 2,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 1,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "us-east",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.4",
+              "desired_generation": 3,
+              "confirmed_version": "1.4.4",
+              "confirmed_generation": 3,
+              "running_version": "1.4.4",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 3,
+              "duplicates_suppressed": 1,
+              "artifacts_rejected": 0
+            }
+          ],
+          "jobs": {
+            "pending": 2,
+            "succeeded": 5
+          },
+          "audit_events": 33,
+          "audit_head": "5d3b0eae3791cc8c",
+          "events": [
+            {
+              "tick": 238,
+              "ms": 2380,
+              "type": "fault.package_tamper_armed",
+              "details": {
+                "region": "adc-1"
+              }
+            }
+          ]
+        },
+        {
+          "tick": 240,
+          "ms": 2400,
+          "leader": 2,
+          "nodes": [
+            {
+              "id": 1,
+              "name": "cp-1",
+              "state": "follower",
+              "term": 2,
+              "commit": 19,
+              "applied": 19
+            },
+            {
+              "id": 2,
+              "name": "cp-2",
+              "state": "leader",
+              "term": 2,
+              "commit": 19,
+              "applied": 19
+            },
+            {
+              "id": 3,
+              "name": "cp-3",
+              "state": "down",
+              "term": 1,
+              "commit": 8,
+              "applied": 8
+            }
+          ],
+          "regions": [
+            {
+              "name": "adc-1",
+              "mode": "air-gapped",
+              "worker": "running",
+              "desired_version": "1.4.3",
+              "desired_generation": 2,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 1,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 1,
+              "artifacts_rejected": 2
+            },
+            {
+              "name": "eu-west",
+              "mode": "partitioned",
+              "worker": "running",
+              "desired_version": "1.4.3",
+              "desired_generation": 2,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 1,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "us-east",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.4",
+              "desired_generation": 3,
+              "confirmed_version": "1.4.4",
+              "confirmed_generation": 3,
+              "running_version": "1.4.4",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 3,
+              "duplicates_suppressed": 1,
+              "artifacts_rejected": 0
+            }
+          ],
+          "jobs": {
+            "pending": 2,
+            "succeeded": 5
+          },
+          "audit_events": 35,
+          "audit_head": "a24932506641dd6f",
+          "events": [
+            {
+              "tick": 240,
+              "ms": 2400,
+              "type": "fault.package_tampered_in_transit",
+              "details": {
+                "region": "adc-1",
+                "sequence": "3"
+              }
+            },
+            {
+              "tick": 240,
+              "ms": 2400,
+              "type": "package.rejected",
+              "details": {
+                "reason": "job deploy-1.4.3-3: artifact digest mismatch",
+                "region": "adc-1",
+                "sequence": "3"
+              }
+            }
+          ]
+        },
+        {
+          "tick": 300,
+          "ms": 3000,
+          "leader": 2,
+          "nodes": [
+            {
+              "id": 1,
+              "name": "cp-1",
+              "state": "follower",
+              "term": 2,
+              "commit": 19,
+              "applied": 19
+            },
+            {
+              "id": 2,
+              "name": "cp-2",
+              "state": "leader",
+              "term": 2,
+              "commit": 19,
+              "applied": 19
+            },
+            {
+              "id": 3,
+              "name": "cp-3",
+              "state": "down",
+              "term": 1,
+              "commit": 8,
+              "applied": 8
+            }
+          ],
+          "regions": [
+            {
+              "name": "adc-1",
+              "mode": "air-gapped",
+              "worker": "running",
+              "desired_version": "1.4.3",
+              "desired_generation": 2,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.3",
+              "pending_jobs": 1,
+              "buffered_acks": 1,
+              "executed": 2,
+              "duplicates_suppressed": 1,
+              "artifacts_rejected": 2
+            },
+            {
+              "name": "eu-west",
+              "mode": "partitioned",
+              "worker": "running",
+              "desired_version": "1.4.3",
+              "desired_generation": 2,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 1,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "us-east",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.4",
+              "desired_generation": 3,
+              "confirmed_version": "1.4.4",
+              "confirmed_generation": 3,
+              "running_version": "1.4.4",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 3,
+              "duplicates_suppressed": 1,
+              "artifacts_rejected": 0
+            }
+          ],
+          "jobs": {
+            "pending": 2,
+            "succeeded": 5
+          },
+          "audit_events": 37,
+          "audit_head": "82847f5168f2cc8a",
+          "events": [
+            {
+              "tick": 300,
+              "ms": 3000,
+              "type": "package.imported",
+              "details": {
+                "jobs": "1",
+                "region": "adc-1",
+                "sequence": "4"
+              }
+            },
+            {
+              "tick": 300,
+              "ms": 3000,
+              "type": "job.executed",
+              "details": {
+                "generation": "2",
+                "job": "deploy-1.4.3-3",
+                "region": "adc-1",
+                "version": "1.4.3"
+              }
+            }
+          ]
+        },
+        {
+          "tick": 360,
+          "ms": 3600,
+          "leader": 2,
+          "nodes": [
+            {
+              "id": 1,
+              "name": "cp-1",
+              "state": "follower",
+              "term": 2,
+              "commit": 19,
+              "applied": 19
+            },
+            {
+              "id": 2,
+              "name": "cp-2",
+              "state": "leader",
+              "term": 2,
+              "commit": 19,
+              "applied": 19
+            },
+            {
+              "id": 3,
+              "name": "cp-3",
+              "state": "down",
+              "term": 1,
+              "commit": 8,
+              "applied": 8
+            }
+          ],
+          "regions": [
+            {
+              "name": "adc-1",
+              "mode": "air-gapped",
+              "worker": "running",
+              "desired_version": "1.4.3",
+              "desired_generation": 2,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.3",
+              "pending_jobs": 1,
+              "buffered_acks": 1,
+              "executed": 2,
+              "duplicates_suppressed": 2,
+              "artifacts_rejected": 2
+            },
+            {
+              "name": "eu-west",
+              "mode": "partitioned",
+              "worker": "running",
+              "desired_version": "1.4.3",
+              "desired_generation": 2,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 1,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "us-east",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.4",
+              "desired_generation": 3,
+              "confirmed_version": "1.4.4",
+              "confirmed_generation": 3,
+              "running_version": "1.4.4",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 3,
+              "duplicates_suppressed": 1,
+              "artifacts_rejected": 0
+            }
+          ],
+          "jobs": {
+            "pending": 2,
+            "succeeded": 5
+          },
+          "audit_events": 38,
+          "audit_head": "38a1b0beda00c9c5",
+          "events": [
+            {
+              "tick": 360,
+              "ms": 3600,
+              "type": "package.imported",
+              "details": {
+                "jobs": "1",
+                "region": "adc-1",
+                "sequence": "5"
+              }
+            }
+          ]
+        },
+        {
+          "tick": 363,
+          "ms": 3630,
+          "leader": 2,
+          "nodes": [
+            {
+              "id": 1,
+              "name": "cp-1",
+              "state": "follower",
+              "term": 2,
+              "commit": 19,
+              "applied": 19
+            },
+            {
+              "id": 2,
+              "name": "cp-2",
+              "state": "leader",
+              "term": 2,
+              "commit": 20,
+              "applied": 20
+            },
+            {
+              "id": 3,
+              "name": "cp-3",
+              "state": "down",
+              "term": 1,
+              "commit": 8,
+              "applied": 8
+            }
+          ],
+          "regions": [
+            {
+              "name": "adc-1",
+              "mode": "air-gapped",
+              "worker": "running",
+              "desired_version": "1.4.3",
+              "desired_generation": 2,
+              "confirmed_version": "1.4.3",
+              "confirmed_generation": 2,
+              "running_version": "1.4.3",
+              "pending_jobs": 0,
+              "buffered_acks": 1,
+              "executed": 2,
+              "duplicates_suppressed": 2,
+              "artifacts_rejected": 2
+            },
+            {
+              "name": "eu-west",
+              "mode": "partitioned",
+              "worker": "running",
+              "desired_version": "1.4.3",
+              "desired_generation": 2,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 1,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "us-east",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.4",
+              "desired_generation": 3,
+              "confirmed_version": "1.4.4",
+              "confirmed_generation": 3,
+              "running_version": "1.4.4",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 3,
+              "duplicates_suppressed": 1,
+              "artifacts_rejected": 0
+            }
+          ],
+          "jobs": {
+            "pending": 1,
+            "succeeded": 6
+          },
+          "audit_events": 39,
+          "audit_head": "9ed115b6d73db3df",
+          "events": [
+            {
+              "tick": 363,
+              "ms": 3630,
+              "type": "job.succeeded",
+              "details": {
+                "job": "deploy-1.4.3-3",
+                "region": "adc-1",
+                "version": "1.4.3"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "reconcile",
+      "title": "eu-west comes back with a backlog",
+      "narration": "While it was dark, 1.4.4 was also queued for eu-west. On reconnect the agent compares desired and actual state, skips straight to the newest generation, marks 1.4.3 as superseded, and never installs an older version over a newer one.",
+      "start_ms": 3630,
+      "end_ms": 4830,
+      "frames": [
+        {
+          "tick": 366,
+          "ms": 3660,
+          "leader": 2,
+          "nodes": [
+            {
+              "id": 1,
+              "name": "cp-1",
+              "state": "follower",
+              "term": 2,
+              "commit": 20,
+              "applied": 20
+            },
+            {
+              "id": 2,
+              "name": "cp-2",
+              "state": "leader",
+              "term": 2,
+              "commit": 22,
+              "applied": 22
+            },
+            {
+              "id": 3,
+              "name": "cp-3",
+              "state": "down",
+              "term": 1,
+              "commit": 8,
+              "applied": 8
+            }
+          ],
+          "regions": [
+            {
+              "name": "adc-1",
+              "mode": "air-gapped",
+              "worker": "running",
+              "desired_version": "1.4.4",
+              "desired_generation": 3,
+              "confirmed_version": "1.4.3",
+              "confirmed_generation": 2,
+              "running_version": "1.4.3",
+              "pending_jobs": 1,
+              "buffered_acks": 1,
+              "executed": 2,
+              "duplicates_suppressed": 2,
+              "artifacts_rejected": 2
+            },
+            {
+              "name": "eu-west",
+              "mode": "partitioned",
+              "worker": "running",
+              "desired_version": "1.4.4",
+              "desired_generation": 3,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 2,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "us-east",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.4",
+              "desired_generation": 3,
+              "confirmed_version": "1.4.4",
+              "confirmed_generation": 3,
+              "running_version": "1.4.4",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 3,
+              "duplicates_suppressed": 1,
+              "artifacts_rejected": 0
+            }
+          ],
+          "jobs": {
+            "pending": 3,
+            "succeeded": 6
+          },
+          "audit_events": 41,
+          "audit_head": "f8e06cd6df5b3f5c",
+          "events": [
+            {
+              "tick": 366,
+              "ms": 3660,
+              "type": "job.committed",
+              "details": {
+                "generation": "3",
+                "job": "deploy-1.4.4-2",
+                "region": "eu-west",
+                "version": "1.4.4"
+              }
+            },
+            {
+              "tick": 366,
+              "ms": 3660,
+              "type": "job.committed",
+              "details": {
+                "generation": "3",
+                "job": "deploy-1.4.4-3",
+                "region": "adc-1",
+                "version": "1.4.4"
+              }
+            }
+          ]
+        },
+        {
+          "tick": 384,
+          "ms": 3840,
+          "leader": 2,
+          "nodes": [
+            {
+              "id": 1,
+              "name": "cp-1",
+              "state": "follower",
+              "term": 2,
+              "commit": 22,
+              "applied": 22
+            },
+            {
+              "id": 2,
+              "name": "cp-2",
+              "state": "leader",
+              "term": 2,
+              "commit": 22,
+              "applied": 22
+            },
+            {
+              "id": 3,
+              "name": "cp-3",
+              "state": "down",
+              "term": 1,
+              "commit": 8,
+              "applied": 8
+            }
+          ],
+          "regions": [
+            {
+              "name": "adc-1",
+              "mode": "air-gapped",
+              "worker": "running",
+              "desired_version": "1.4.4",
+              "desired_generation": 3,
+              "confirmed_version": "1.4.3",
+              "confirmed_generation": 2,
+              "running_version": "1.4.3",
+              "pending_jobs": 1,
+              "buffered_acks": 1,
+              "executed": 2,
+              "duplicates_suppressed": 2,
+              "artifacts_rejected": 2
+            },
+            {
+              "name": "eu-west",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.4",
+              "desired_generation": 3,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.2",
+              "pending_jobs": 2,
+              "buffered_acks": 0,
+              "executed": 1,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "us-east",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.4",
+              "desired_generation": 3,
+              "confirmed_version": "1.4.4",
+              "confirmed_generation": 3,
+              "running_version": "1.4.4",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 3,
+              "duplicates_suppressed": 1,
+              "artifacts_rejected": 0
+            }
+          ],
+          "jobs": {
+            "pending": 3,
+            "succeeded": 6
+          },
+          "audit_events": 42,
+          "audit_head": "09b25e7b04acfe9b",
+          "events": [
+            {
+              "tick": 383,
+              "ms": 3830,
+              "type": "region.reconnected",
+              "details": {
+                "region": "eu-west"
+              }
+            }
+          ]
+        },
+        {
+          "tick": 385,
+          "ms": 3850,
+          "leader": 2,
+          "nodes": [
+            {
+              "id": 1,
+              "name": "cp-1",
+              "state": "follower",
+              "term": 2,
+              "commit": 22,
+              "applied": 22
+            },
+            {
+              "id": 2,
+              "name": "cp-2",
+              "state": "leader",
+              "term": 2,
+              "commit": 22,
+              "applied": 22
+            },
+            {
+              "id": 3,
+              "name": "cp-3",
+              "state": "down",
+              "term": 1,
+              "commit": 8,
+              "applied": 8
+            }
+          ],
+          "regions": [
+            {
+              "name": "adc-1",
+              "mode": "air-gapped",
+              "worker": "running",
+              "desired_version": "1.4.4",
+              "desired_generation": 3,
+              "confirmed_version": "1.4.3",
+              "confirmed_generation": 2,
+              "running_version": "1.4.3",
+              "pending_jobs": 1,
+              "buffered_acks": 1,
+              "executed": 2,
+              "duplicates_suppressed": 2,
+              "artifacts_rejected": 2
+            },
+            {
+              "name": "eu-west",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.4",
+              "desired_generation": 3,
+              "confirmed_version": "1.4.2",
+              "confirmed_generation": 1,
+              "running_version": "1.4.4",
+              "pending_jobs": 2,
+              "buffered_acks": 0,
+              "executed": 2,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "us-east",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.4",
+              "desired_generation": 3,
+              "confirmed_version": "1.4.4",
+              "confirmed_generation": 3,
+              "running_version": "1.4.4",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 3,
+              "duplicates_suppressed": 1,
+              "artifacts_rejected": 0
+            }
+          ],
+          "jobs": {
+            "pending": 3,
+            "succeeded": 6
+          },
+          "audit_events": 43,
+          "audit_head": "e4ddb1bb8a30bddd",
+          "events": [
+            {
+              "tick": 385,
+              "ms": 3850,
+              "type": "job.executed",
+              "details": {
+                "generation": "3",
+                "job": "deploy-1.4.4-2",
+                "region": "eu-west",
+                "version": "1.4.4"
+              }
+            }
+          ]
+        },
+        {
+          "tick": 388,
+          "ms": 3880,
+          "leader": 2,
+          "nodes": [
+            {
+              "id": 1,
+              "name": "cp-1",
+              "state": "follower",
+              "term": 2,
+              "commit": 22,
+              "applied": 22
+            },
+            {
+              "id": 2,
+              "name": "cp-2",
+              "state": "leader",
+              "term": 2,
+              "commit": 24,
+              "applied": 24
+            },
+            {
+              "id": 3,
+              "name": "cp-3",
+              "state": "down",
+              "term": 1,
+              "commit": 8,
+              "applied": 8
+            }
+          ],
+          "regions": [
+            {
+              "name": "adc-1",
+              "mode": "air-gapped",
+              "worker": "running",
+              "desired_version": "1.4.4",
+              "desired_generation": 3,
+              "confirmed_version": "1.4.3",
+              "confirmed_generation": 2,
+              "running_version": "1.4.3",
+              "pending_jobs": 1,
+              "buffered_acks": 1,
+              "executed": 2,
+              "duplicates_suppressed": 2,
+              "artifacts_rejected": 2
+            },
+            {
+              "name": "eu-west",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.4",
+              "desired_generation": 3,
+              "confirmed_version": "1.4.4",
+              "confirmed_generation": 3,
+              "running_version": "1.4.4",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 2,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "us-east",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.4",
+              "desired_generation": 3,
+              "confirmed_version": "1.4.4",
+              "confirmed_generation": 3,
+              "running_version": "1.4.4",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 3,
+              "duplicates_suppressed": 1,
+              "artifacts_rejected": 0
+            }
+          ],
+          "jobs": {
+            "pending": 1,
+            "succeeded": 7,
+            "superseded": 1
+          },
+          "audit_events": 45,
+          "audit_head": "c9ce687db446dcb8",
+          "events": [
+            {
+              "tick": 388,
+              "ms": 3880,
+              "type": "job.superseded",
+              "details": {
+                "job": "deploy-1.4.3-2",
+                "region": "eu-west",
+                "version": "1.4.3"
+              }
+            },
+            {
+              "tick": 388,
+              "ms": 3880,
+              "type": "job.succeeded",
+              "details": {
+                "job": "deploy-1.4.4-2",
+                "region": "eu-west",
+                "version": "1.4.4"
+              }
+            }
+          ]
+        },
+        {
+          "tick": 420,
+          "ms": 4200,
+          "leader": 2,
+          "nodes": [
+            {
+              "id": 1,
+              "name": "cp-1",
+              "state": "follower",
+              "term": 2,
+              "commit": 24,
+              "applied": 24
+            },
+            {
+              "id": 2,
+              "name": "cp-2",
+              "state": "leader",
+              "term": 2,
+              "commit": 24,
+              "applied": 24
+            },
+            {
+              "id": 3,
+              "name": "cp-3",
+              "state": "down",
+              "term": 1,
+              "commit": 8,
+              "applied": 8
+            }
+          ],
+          "regions": [
+            {
+              "name": "adc-1",
+              "mode": "air-gapped",
+              "worker": "running",
+              "desired_version": "1.4.4",
+              "desired_generation": 3,
+              "confirmed_version": "1.4.3",
+              "confirmed_generation": 2,
+              "running_version": "1.4.4",
+              "pending_jobs": 1,
+              "buffered_acks": 1,
+              "executed": 3,
+              "duplicates_suppressed": 2,
+              "artifacts_rejected": 2
+            },
+            {
+              "name": "eu-west",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.4",
+              "desired_generation": 3,
+              "confirmed_version": "1.4.4",
+              "confirmed_generation": 3,
+              "running_version": "1.4.4",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 2,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "us-east",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.4",
+              "desired_generation": 3,
+              "confirmed_version": "1.4.4",
+              "confirmed_generation": 3,
+              "running_version": "1.4.4",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 3,
+              "duplicates_suppressed": 1,
+              "artifacts_rejected": 0
+            }
+          ],
+          "jobs": {
+            "pending": 1,
+            "succeeded": 7,
+            "superseded": 1
+          },
+          "audit_events": 47,
+          "audit_head": "f2fa188468c7fb84",
+          "events": [
+            {
+              "tick": 420,
+              "ms": 4200,
+              "type": "package.imported",
+              "details": {
+                "jobs": "1",
+                "region": "adc-1",
+                "sequence": "6"
+              }
+            },
+            {
+              "tick": 420,
+              "ms": 4200,
+              "type": "job.executed",
+              "details": {
+                "generation": "3",
+                "job": "deploy-1.4.4-3",
+                "region": "adc-1",
+                "version": "1.4.4"
+              }
+            }
+          ]
+        },
+        {
+          "tick": 423,
+          "ms": 4230,
+          "leader": 2,
+          "nodes": [
+            {
+              "id": 1,
+              "name": "cp-1",
+              "state": "follower",
+              "term": 2,
+              "commit": 24,
+              "applied": 24
+            },
+            {
+              "id": 2,
+              "name": "cp-2",
+              "state": "leader",
+              "term": 2,
+              "commit": 25,
+              "applied": 25
+            },
+            {
+              "id": 3,
+              "name": "cp-3",
+              "state": "down",
+              "term": 1,
+              "commit": 8,
+              "applied": 8
+            }
+          ],
+          "regions": [
+            {
+              "name": "adc-1",
+              "mode": "air-gapped",
+              "worker": "running",
+              "desired_version": "1.4.4",
+              "desired_generation": 3,
+              "confirmed_version": "1.4.3",
+              "confirmed_generation": 2,
+              "running_version": "1.4.4",
+              "pending_jobs": 1,
+              "buffered_acks": 1,
+              "executed": 3,
+              "duplicates_suppressed": 2,
+              "artifacts_rejected": 2
+            },
+            {
+              "name": "eu-west",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.4",
+              "desired_generation": 3,
+              "confirmed_version": "1.4.4",
+              "confirmed_generation": 3,
+              "running_version": "1.4.4",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 2,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "us-east",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.4",
+              "desired_generation": 3,
+              "confirmed_version": "1.4.4",
+              "confirmed_generation": 3,
+              "running_version": "1.4.4",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 3,
+              "duplicates_suppressed": 1,
+              "artifacts_rejected": 0
+            }
+          ],
+          "jobs": {
+            "pending": 1,
+            "succeeded": 7,
+            "superseded": 1
+          },
+          "audit_events": 48,
+          "audit_head": "37e107fb4197793e",
+          "events": [
+            {
+              "tick": 423,
+              "ms": 4230,
+              "type": "ack.duplicate_ignored",
+              "details": {
+                "job": "deploy-1.4.3-3"
+              }
+            }
+          ]
+        },
+        {
+          "tick": 480,
+          "ms": 4800,
+          "leader": 2,
+          "nodes": [
+            {
+              "id": 1,
+              "name": "cp-1",
+              "state": "follower",
+              "term": 2,
+              "commit": 25,
+              "applied": 25
+            },
+            {
+              "id": 2,
+              "name": "cp-2",
+              "state": "leader",
+              "term": 2,
+              "commit": 25,
+              "applied": 25
+            },
+            {
+              "id": 3,
+              "name": "cp-3",
+              "state": "down",
+              "term": 1,
+              "commit": 8,
+              "applied": 8
+            }
+          ],
+          "regions": [
+            {
+              "name": "adc-1",
+              "mode": "air-gapped",
+              "worker": "running",
+              "desired_version": "1.4.4",
+              "desired_generation": 3,
+              "confirmed_version": "1.4.3",
+              "confirmed_generation": 2,
+              "running_version": "1.4.4",
+              "pending_jobs": 1,
+              "buffered_acks": 1,
+              "executed": 3,
+              "duplicates_suppressed": 3,
+              "artifacts_rejected": 2
+            },
+            {
+              "name": "eu-west",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.4",
+              "desired_generation": 3,
+              "confirmed_version": "1.4.4",
+              "confirmed_generation": 3,
+              "running_version": "1.4.4",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 2,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "us-east",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.4",
+              "desired_generation": 3,
+              "confirmed_version": "1.4.4",
+              "confirmed_generation": 3,
+              "running_version": "1.4.4",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 3,
+              "duplicates_suppressed": 1,
+              "artifacts_rejected": 0
+            }
+          ],
+          "jobs": {
+            "pending": 1,
+            "succeeded": 7,
+            "superseded": 1
+          },
+          "audit_events": 49,
+          "audit_head": "55bfba138f07478f",
+          "events": [
+            {
+              "tick": 480,
+              "ms": 4800,
+              "type": "package.imported",
+              "details": {
+                "jobs": "1",
+                "region": "adc-1",
+                "sequence": "7"
+              }
+            }
+          ]
+        },
+        {
+          "tick": 483,
+          "ms": 4830,
+          "leader": 2,
+          "nodes": [
+            {
+              "id": 1,
+              "name": "cp-1",
+              "state": "follower",
+              "term": 2,
+              "commit": 25,
+              "applied": 25
+            },
+            {
+              "id": 2,
+              "name": "cp-2",
+              "state": "leader",
+              "term": 2,
+              "commit": 26,
+              "applied": 26
+            },
+            {
+              "id": 3,
+              "name": "cp-3",
+              "state": "down",
+              "term": 1,
+              "commit": 8,
+              "applied": 8
+            }
+          ],
+          "regions": [
+            {
+              "name": "adc-1",
+              "mode": "air-gapped",
+              "worker": "running",
+              "desired_version": "1.4.4",
+              "desired_generation": 3,
+              "confirmed_version": "1.4.4",
+              "confirmed_generation": 3,
+              "running_version": "1.4.4",
+              "pending_jobs": 0,
+              "buffered_acks": 1,
+              "executed": 3,
+              "duplicates_suppressed": 3,
+              "artifacts_rejected": 2
+            },
+            {
+              "name": "eu-west",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.4",
+              "desired_generation": 3,
+              "confirmed_version": "1.4.4",
+              "confirmed_generation": 3,
+              "running_version": "1.4.4",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 2,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "us-east",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.4",
+              "desired_generation": 3,
+              "confirmed_version": "1.4.4",
+              "confirmed_generation": 3,
+              "running_version": "1.4.4",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 3,
+              "duplicates_suppressed": 1,
+              "artifacts_rejected": 0
+            }
+          ],
+          "jobs": {
+            "succeeded": 8,
+            "superseded": 1
+          },
+          "audit_events": 50,
+          "audit_head": "833b970b56c7c7fb",
+          "events": [
+            {
+              "tick": 483,
+              "ms": 4830,
+              "type": "job.succeeded",
+              "details": {
+                "job": "deploy-1.4.4-3",
+                "region": "adc-1",
+                "version": "1.4.4"
+              }
+            }
+          ]
+        }
+      ],
+      "facts": {
+        "deploy_1.4.3_2_status": "superseded",
+        "reconcile_ms": "50"
+      }
+    },
+    {
+      "id": "rejoin",
+      "title": "The crashed replica restarts and catches up",
+      "narration": "It rejoins as a follower, receives the entries it missed, and applies them. All three replicas end with byte-identical state.",
+      "start_ms": 4830,
+      "end_ms": 4840,
+      "frames": [
+        {
+          "tick": 484,
+          "ms": 4840,
+          "leader": 2,
+          "nodes": [
+            {
+              "id": 1,
+              "name": "cp-1",
+              "state": "follower",
+              "term": 2,
+              "commit": 26,
+              "applied": 26
+            },
+            {
+              "id": 2,
+              "name": "cp-2",
+              "state": "leader",
+              "term": 2,
+              "commit": 26,
+              "applied": 26
+            },
+            {
+              "id": 3,
+              "name": "cp-3",
+              "state": "follower",
+              "term": 2,
+              "commit": 26,
+              "applied": 26
+            }
+          ],
+          "regions": [
+            {
+              "name": "adc-1",
+              "mode": "air-gapped",
+              "worker": "running",
+              "desired_version": "1.4.4",
+              "desired_generation": 3,
+              "confirmed_version": "1.4.4",
+              "confirmed_generation": 3,
+              "running_version": "1.4.4",
+              "pending_jobs": 0,
+              "buffered_acks": 1,
+              "executed": 3,
+              "duplicates_suppressed": 3,
+              "artifacts_rejected": 2
+            },
+            {
+              "name": "eu-west",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.4",
+              "desired_generation": 3,
+              "confirmed_version": "1.4.4",
+              "confirmed_generation": 3,
+              "running_version": "1.4.4",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 2,
+              "duplicates_suppressed": 0,
+              "artifacts_rejected": 0
+            },
+            {
+              "name": "us-east",
+              "mode": "connected",
+              "worker": "running",
+              "desired_version": "1.4.4",
+              "desired_generation": 3,
+              "confirmed_version": "1.4.4",
+              "confirmed_generation": 3,
+              "running_version": "1.4.4",
+              "pending_jobs": 0,
+              "buffered_acks": 0,
+              "executed": 3,
+              "duplicates_suppressed": 1,
+              "artifacts_rejected": 0
+            }
+          ],
+          "jobs": {
+            "succeeded": 8,
+            "superseded": 1
+          },
+          "audit_events": 51,
+          "audit_head": "14e868ca826c2632",
+          "events": [
+            {
+              "tick": 483,
+              "ms": 4830,
+              "type": "node.restarted",
+              "details": {
+                "node": "3"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "final": {
+    "tick": 484,
+    "ms": 4840,
+    "leader": 2,
+    "nodes": [
+      {
+        "id": 1,
+        "name": "cp-1",
+        "state": "follower",
+        "term": 2,
+        "commit": 26,
+        "applied": 26
+      },
+      {
+        "id": 2,
+        "name": "cp-2",
+        "state": "leader",
+        "term": 2,
+        "commit": 26,
+        "applied": 26
+      },
+      {
+        "id": 3,
+        "name": "cp-3",
+        "state": "follower",
+        "term": 2,
+        "commit": 26,
+        "applied": 26
+      }
+    ],
+    "regions": [
+      {
+        "name": "adc-1",
+        "mode": "air-gapped",
+        "worker": "running",
+        "desired_version": "1.4.4",
+        "desired_generation": 3,
+        "confirmed_version": "1.4.4",
+        "confirmed_generation": 3,
+        "running_version": "1.4.4",
+        "pending_jobs": 0,
+        "buffered_acks": 1,
+        "executed": 3,
+        "duplicates_suppressed": 3,
+        "artifacts_rejected": 2
+      },
+      {
+        "name": "eu-west",
+        "mode": "connected",
+        "worker": "running",
+        "desired_version": "1.4.4",
+        "desired_generation": 3,
+        "confirmed_version": "1.4.4",
+        "confirmed_generation": 3,
+        "running_version": "1.4.4",
+        "pending_jobs": 0,
+        "buffered_acks": 0,
+        "executed": 2,
+        "duplicates_suppressed": 0,
+        "artifacts_rejected": 0
+      },
+      {
+        "name": "us-east",
+        "mode": "connected",
+        "worker": "running",
+        "desired_version": "1.4.4",
+        "desired_generation": 3,
+        "confirmed_version": "1.4.4",
+        "confirmed_generation": 3,
+        "running_version": "1.4.4",
+        "pending_jobs": 0,
+        "buffered_acks": 0,
+        "executed": 3,
+        "duplicates_suppressed": 1,
+        "artifacts_rejected": 0
+      }
+    ],
+    "jobs": {
+      "succeeded": 8,
+      "superseded": 1
+    },
+    "audit_events": 51,
+    "audit_head": "14e868ca826c2632"
+  },
+  "facts": {
+    "failover_election_ms": "270",
+    "failover_write_gap_ms": "290",
+    "reconcile_ms": "50"
+  },
+  "audit_verified": true,
+  "audit_events": 51,
+  "replicas_agree": true,
+  "state_digest": "88f32446ca6eac27a4668373fb9315f4c30f8fe4a2be91c5d4209f6726683da6",
+  "checks": {
+    "all_regions_converged": true,
+    "audit_chain_verified": true,
+    "duplicate_submit_suppressed": true,
+    "no_double_execution": true,
+    "no_pending_jobs": true,
+    "replicas_identical": true,
+    "superseded_not_installed": true,
+    "tampered_package_rejected": true
+  }
+}
